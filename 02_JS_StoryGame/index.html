@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>StoryGame</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <style>
+        body, html {
+            height: 100%;
+        }
+        body{
+            background-image: url("img/mbbg.jpg");            
+            background-size: cover;
+            background-repeat:no-repeat;
+            background-position: center; 
+            height:100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+         
+        var id = "";
+
+        function userName(){
+            swal.fire({
+                title:"取個名字吧？",
+                input:"text",
+                inputValue:"DIO",
+                icon:"question",
+                confirmButtonText: "YSE",
+                showCancelButton: true,
+                cancelButtonText: "NO",
+                showCloseButton:true,
+                
+            }).then(function(getName){
+                if(getName.value){                    
+                    id = getName.value;
+                    swal.fire({
+                        title:`你的名字是${id}`
+                    }).then(storyStart);
+                }
+                else if(getName.dismiss === "cancel"){                    
+                    id = "JOJO",
+                    swal.fire({
+                        imageUrl:"https://stickershop.line-scdn.net/stickershop/v1/product/3065/LINEStorePC/main.png;compress=true",
+                        imageHeught:200,
+                        imageWidth:200,
+                        title:`不取名的話就叫${id}吧`                      
+                    }).then(storyStart);
+                }
+            })
+        }
+        userName();
+       
+  
+
+        function storyStart(){
+            swal.fire({
+                title:`${id}準備好開始了嗎?`,
+                icon:"warning",
+                confirmButtonText: "開始冒險",
+                showCancelButton: true,
+                cancelButtonText: "還沒準備好",                
+            })
+            .then(function(start){
+                if(start.value){   
+                    swal.fire({
+                        title:`${id}你的冒險即將開始<br>請謹慎的選擇答案`,
+                        icon:"warning"
+                    }).then(challenge1);
+                }
+                else if (start.dismiss === "cancel"){
+                    swal.fire({
+                        title:`你已經死了`,
+                        imageUrl:"img/die.png",
+                        text:`沒有準備好還敢進來`,
+                        icon:"error"
+                    })
+                }
+            }) 
+        }
+        
+        function challenge1(){
+            swal.fire({
+                title:`你的前方出現了吉爾迦斯！<br>他拿著手中的聖權魔杖朝你襲來<br>是否使用防禦來抵檔傷害？`,
+                imageUrl:"img/1.jpg",
+                icon:"warning",
+                confirmButtonText: "是",
+                showCancelButton: true,
+                cancelButtonText: "否",                
+            })
+            .then(function(getName){
+                if(getName.value){   
+                    c1ans =                  
+                    swal.fire({
+                        title:`使用了防禦 成功抵消了一點傷害`,
+                        imageUrl:"img/Defense.jpg",
+                        icon:"success"
+                    }).then(challenge2);
+                }
+                else{
+                    c1ans =                     
+                    swal.fire({
+                        title:`因為沒有使用防禦<br>你被吉爾迦斯的魔杖攻擊擊倒了`,
+                        imageUrl:"img/die.png",
+                        text:`GAME OVER`,
+                        icon:"error"
+                    })
+                }
+            }) 
+        }
+
+        function challenge2(){
+            swal.fire({
+                title:`吉爾迦斯的手中產生了魔力的光輝<br>想要把你抓住吸取生命力<br>是否要開啟魔力盾牌來抵消傷害？`,
+                imageUrl:"img/2.png",
+                icon:"warning",
+                confirmButtonText: "是",
+                showCancelButton: true,
+                cancelButtonText: "否",                
+            })
+            .then(function(getName){
+                if(getName.value){   
+                    c1ans =                  
+                    swal.fire({
+                        title:`開啟了魔力盾牌<br>消耗了一半魔力抵消了這次的攻擊`,
+                        imageUrl:"img/Mana Shield.jpg",
+                        icon:"success"
+                    }).then(challenge3);
+                }
+                else{
+                    c1ans =                     
+                    swal.fire({
+                        title:`因為沒有開啟魔力盾牌<br>吉爾迦斯的技能把你的生命力汲取至盡`,
+                        imageUrl:"img/die.png",
+                        text:`GAME OVER`,
+                        icon:"error"
+                    })
+                }
+            }) 
+        }
+
+        function challenge3(){
+            swal.fire({
+                title:`吉爾迦斯揮動了翅膀<br>躍空至天<br>天空出現了因周圍的魔力凝聚而成的流星雨群<br>吉爾迦斯正在施展流星雨技能<br>你要使用聖盾庇護嗎？`,
+                imageUrl:"img/6CU.png",
+                icon:"warning",
+                confirmButtonText: "是",
+                showCancelButton: true,
+                cancelButtonText: "否",                
+            })
+            .then(function(getName){
+                if(getName.value){   
+                    c1ans =                  
+                    swal.fire({
+                        title:`使用了聖盾庇護<br>成功防禦了吉爾迦斯的流星雨`,
+                        imageUrl:"img/die.png",
+                        imageUrl:"Shield Of Trust.jpg",
+                        icon:"success"
+                    }).then(challenge4);
+                }
+                else{
+                    c1ans =                     
+                    swal.fire({
+                        title:`因為沒有聖盾的保護<br>流星雨的轟炸把你擊倒了`,
+                        imageUrl:"img/die.png",
+                        text:`GAME OVER`,
+                        icon:"error"
+                    })
+                }
+            }) 
+        }
+
+        function challenge4(){
+            swal.fire({
+                title:`你成功抵禦吉爾迦斯的流星雨攻擊 他現在處於虛弱狀態 是否要使用聖光之錐剝削他的護甲？`,
+                imageUrl:"img/4.png",
+                icon:"warning",
+                confirmButtonText: "是",
+                showCancelButton: true,
+                cancelButtonText: "否",                
+            })
+            .then(function(getName){
+                if(getName.value){   
+                    c1ans =                  
+                    swal.fire({
+                        title:`使用了聖光之錐<br>成功削弱了吉爾迦斯的護甲`,
+                        imageUrl:"img/Celestial Spike.jpg",
+                        icon:"success"
+                    }).then(challenge5);
+                }
+                else{
+                    c1ans =                     
+                    swal.fire({
+                        title:`因為沒有聖光之錐<br>進一步弱化吉爾迦斯<br>他恢復之後把你擊倒了`,
+                        imageUrl:"img/die.png",
+                        text:`GAME OVER`,
+                        icon:"error"
+                    })
+                }
+            }) 
+        }
+
+        function challenge5(){
+            swal.fire({
+                title:`因為使用了聖光之錐弱化了吉爾迦斯<br>現在使用審判之刃應該能對他造成傷害<br>是否要使用審判之刃？`,
+                imageUrl:"img/5.png",
+                icon:"warning",
+                confirmButtonText: "是",
+                showCancelButton: true,
+                cancelButtonText: "否",
+            })
+            .then(function(getName){
+                if(getName.value){   
+                    c1ans =                  
+                    swal.fire({
+                        title:`使用了審判之刃<br>成功終結了吉爾迦斯！`,
+                        imageUrl:"img/6.png",
+                        icon:"success"
+                    }).then(finish);
+                }
+                else{
+                    c1ans =                     
+                    swal.fire({
+                        title:`因為沒有使用審判之刃對吉爾迦斯造成傷害<br>他使用了吸入靈魂把你的靈魂抽離了`,
+                        imageUrl:"img/die.png",
+                        text:`GAME OVER`,
+                        icon:"error"
+                    })
+                }
+            }) 
+        }
+
+        function finish(){
+            swal.fire({
+                title:`看來是吉爾迦斯屠殺者呢`,
+                text:"結束",
+                icon:"info",               
+                showCloseButton:true
+            })            
+        }
+
+    </script>
+
+</body>
+
+</html>
